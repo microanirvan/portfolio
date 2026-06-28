@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Cream parchment background */
+    --background: 42 30% 96%;
+    --foreground: 155 30% 12%;
+
+    --card: 40 35% 98%;
+    --card-foreground: 155 30% 12%;
+
+    --popover: 40 35% 98%;
+    --popover-foreground: 155 30% 12%;
+
+    /* Deep emerald — academic, botanical */
+    --primary: 158 55% 18%;
+    --primary-foreground: 42 40% 96%;
+    --primary-glow: 158 45% 32%;
+
+    /* Warm aged brass */
+    --secondary: 38 45% 88%;
+    --secondary-foreground: 155 40% 15%;
+
+    --muted: 40 25% 92%;
+    --muted-foreground: 155 15% 35%;
+
+    --accent: 35 60% 52%;
+    --accent-foreground: 42 40% 98%;
+
+    --destructive: 0 70% 45%;
+    --destructive-foreground: 42 40% 98%;
+
+    --border: 40 25% 85%;
+    --input: 40 25% 85%;
+    --ring: 158 55% 18%;
+
+    --radius: 0.25rem;
+
+    /* Custom tokens */
+    --ink: 155 40% 8%;
+    --parchment: 42 35% 94%;
+    --gold: 38 55% 48%;
+    --moss: 90 25% 35%;
+
+    --gradient-hero: linear-gradient(135deg, hsl(158 55% 12%) 0%, hsl(155 45% 18%) 50%, hsl(90 25% 22%) 100%);
+    --gradient-emerald: linear-gradient(180deg, hsl(158 55% 18%), hsl(158 50% 24%));
+    --gradient-parchment: linear-gradient(180deg, hsl(42 35% 96%), hsl(40 30% 92%));
+    --gradient-gold: linear-gradient(135deg, hsl(38 60% 55%), hsl(35 55% 42%));
+
+    --shadow-soft: 0 1px 2px hsl(155 40% 10% / 0.06), 0 8px 24px -12px hsl(155 40% 10% / 0.12);
+    --shadow-elegant: 0 20px 60px -20px hsl(158 55% 18% / 0.25);
+    --shadow-deep: 0 30px 80px -30px hsl(155 40% 8% / 0.45);
+
+    --transition-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', sans-serif;
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  .font-serif { font-family: 'Cormorant Garamond', serif; }
+  .font-mono  { font-family: 'JetBrains Mono', monospace; }
+}
+
+@layer components {
+  .container-prose { @apply mx-auto max-w-6xl px-6 md:px-10; }
+
+  .section-label {
+    @apply font-mono text-[11px] uppercase tracking-[0.25em] text-primary/70;
+  }
+
+  .ornament {
+    display: inline-block;
+    width: 56px; height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.5), transparent);
+  }
+
+  .ornament-gold {
+    background: linear-gradient(90deg, transparent, hsl(var(--gold) / 0.7), transparent);
+  }
+
+  .paper-card {
+    @apply bg-card border border-border/60;
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.5s var(--transition-smooth), box-shadow 0.5s var(--transition-smooth);
+  }
+  .paper-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-elegant);
+  }
+
+  .ink-link {
+    @apply relative inline-block text-primary;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.4s var(--transition-smooth);
+  }
+  .ink-link:hover { background-size: 100% 1px; }
+
+  .grain::before {
+    content: "";
+    position: absolute; inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(hsl(155 40% 10% / 0.06) 1px, transparent 1px);
+    background-size: 3px 3px;
+    opacity: 0.4;
+    mix-blend-mode: multiply;
+  }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .bg-hero { background: var(--gradient-hero); }
+  .bg-parchment { background: var(--gradient-parchment); }
+  .shadow-elegant { box-shadow: var(--shadow-elegant); }
+  .shadow-deep { box-shadow: var(--shadow-deep); }
+
+  .animate-rise {
+    animation: rise 0.9s var(--transition-smooth) both;
+  }
+  .animate-fade {
+    animation: fade 1.2s ease both;
+  }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
